@@ -20,11 +20,15 @@ export const handleUnAxiosError = (error: AxiosError | unknown): void | 401 => {
       console.error("Error:", error);
     }
   };
-export async function loginUser( user: UserInterface): Promise<UserInterface | void> {
+export async function loginUser( user: Partial<UserInterface>): Promise<string | void> {
     try {
       const response = await axios.post(`${BASE_URL}/auth/login`, user);
-      console.log(response.data);
-      return response.data;
+      if (response.status === 200 && response.data) {
+        console.log(response.data);
+        return response.data.access_token;
+      } else {
+        throw new Error('login failed token does not provided');
+      }
     } catch (error) {
       handleUnAxiosError(error);
     }
@@ -33,11 +37,14 @@ export async function loginUser( user: UserInterface): Promise<UserInterface | v
     user: UserInterface
   ): Promise<number | void> {
     try {
+      const config = {
+        headers: {
+          'access_token': localStorage.getItem('access_token') || "token not found" 
+        }
+      };
       console.log("from services: ", user);
-      const response = await axios.post(`${BASE_URL}/register`, user,{
-        withCredentials: true,
-      });
-      console.log(response.data);
+      const response = await axios.post(`${BASE_URL}/register`, user, config);
+      console.log(response.data.message);
       return response.status;
     } catch (error) {
       handleUnAxiosError(error);
