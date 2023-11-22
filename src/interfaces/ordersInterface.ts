@@ -12,7 +12,7 @@ export interface ProductInterface {
     orderType: "express" | "regular" | "pickup";
   }
   
-  export interface OrderInterfce {
+  export interface OrderInterface {
     _id?: string
     cartItems: ProductInterface[];
     orderTime: Date;

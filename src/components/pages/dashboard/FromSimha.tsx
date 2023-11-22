@@ -1,40 +1,33 @@
-import {
-  Typography,
-  Box,
-  Slider,
-  FormGroup,
-  FormControlLabel,
-  Checkbox,
-  Button,
-  Stack,
-} from "@mui/material";
-import Orders from "./Orders";
-import TableHeader from "./TableHeader";
+import { useParams } from "react-router-dom";
 import { ChangeEvent, useEffect, useState } from "react";
+import {
+  Box,
+  Button,
+  Checkbox,
+  Container,
+  FormControlLabel,
+  FormGroup,
+  Slider,
+} from "@mui/material";
 import { fetchOrders } from "../../../services/ordersService";
 import { OrderInterface } from "../../../interfaces/ordersInterface";
-import {
-  options,
-  initialSelctedOptions,
-  tSelectedOptions,
-  filterOrdersByPriceRange,
-  filterOrdersByDate,
-  filterOrdersByOrderType,
-  filterOrdersByStatus,
-} from "../../../utils/filtersFuncs";
+import {options, initialSelctedOptions, tSelectedOptions, filterOrdersByPriceRange, filterOrdersByDate, filterOrdersByOrderType, filterOrdersByStatus } from "../../../utils/filtersFuncs";
+
 
 function valuetext(value: number) {
   return `${value}$`;
 }
 
-export default function Table() {
+
+
+
+const CategoryPage = (): JSX.Element => {
+  const { category } = useParams();
   const [priceValue, setPriceValue] = useState<number[]>([0, 2000]);
-  const [dateValue, setDateValue] = useState("0000-00-00");
+  const [dateValue, setDateValue] = useState('0000-00-00');
   const [orders, setOrders] = useState<OrderInterface[]>([]);
   const [filteredOrders, setFilteredOrders] = useState<OrderInterface[]>([]);
-  const [selectedOptions, setSelectedOptions] = useState<tSelectedOptions>(
-    initialSelctedOptions
-  );
+  
 
   async function getOrders() {
     const temp: void | OrderInterface[] = await fetchOrders();
@@ -42,6 +35,8 @@ export default function Table() {
       setOrders(temp);
     }
   }
+  
+
   const filterOrders = (
     orders: OrderInterface[],
     selectedOptions: tSelectedOptions
@@ -65,13 +60,10 @@ export default function Table() {
     );
     setFilteredOrders(updatedFilteredOrdersByPrice);
   };
-  useEffect(() => {
-    getOrders();
-  }, []);
 
-  useEffect(() => {
-    filterOrders(orders, selectedOptions);
-  }, [priceValue, orders, selectedOptions, dateValue]);
+  const [selectedOptions, setSelectedOptions] = useState<tSelectedOptions>(
+    initialSelctedOptions
+  );
   const handleStatusCheckboxChange =
   (_option: options["status"]) => (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
@@ -101,6 +93,15 @@ const handleTypeCheckboxChange =
       }));
     }
   };
+
+  useEffect(() => {
+    getOrders();
+  }, []);
+
+  useEffect(() => {
+    filterOrders(orders, selectedOptions);
+  }, [priceValue, orders, selectedOptions, dateValue]);
+
   const handleChange = (event: Event, newValue: number | number[]) => {
     if (event) {
       setPriceValue(newValue as number[]);
@@ -108,63 +109,50 @@ const handleTypeCheckboxChange =
   };
   const handleChangeDate = (event: ChangeEvent<HTMLInputElement>) => {
     const dateObject = new Date(event.target.value);
-    const formattedDate = dateObject.toLocaleDateString("en-GB");
-    setDateValue(formattedDate);
+    const formattedDate = dateObject.toLocaleDateString('en-GB')
+    setDateValue(formattedDate)
   };
   const handleReset = () => {
-    setDateValue(initialSelctedOptions.orderTime);
-    setPriceValue([
-      initialSelctedOptions.price.minPrice,
-      initialSelctedOptions.price.maxPrice,
-    ]);
-    setSelectedOptions(initialSelctedOptions);
-  };
-
+        setDateValue(initialSelctedOptions.orderTime)
+        setPriceValue([initialSelctedOptions.price.minPrice, initialSelctedOptions.price.maxPrice])
+        setSelectedOptions(initialSelctedOptions)
+  }
   return (
-    <Box>
-      <Box
-        sx={{
-          height: "8em",
-          width: "100vw",
-          position: "relative",
-          display: "flex",
-          justifyContent: "space-around",
-        }}
-      >
-        <Box sx={{ display: "flex", height: "10em" }}>
-          <Box sx={{ margin: "8px" }}>
-            <Typography variant="h6">price:</Typography>
-            <Slider
-              sx={{ width: "100px", color: "#009688", marginRight: "5px" }}
-              getAriaLabel={() => "Temperature range"}
-              value={priceValue}
-              onChange={handleChange}
-              valueLabelDisplay="auto"
-              getAriaValueText={valuetext}
-              max={2000}
-              step={10}
-            />
-          </Box>
-          <div
-            style={{
-              height: "90px",
-              width: "0.5px",
-              backgroundColor: "#009688",
-              marginTop: "8px",
-            }}
-          ></div>
+      <div style={{ display: "flex", flexDirection: "row" }}>
+        <Box>
+            <Button onClick={handleReset}>reset filters</Button>
         </Box>
-        <Box sx={{ display: "flex", height: "10em" }}>
-          <Box sx={{ margin: "8px" }}>
-            <Typography variant="h6">status:</Typography>
-            <FormGroup sx={{ display: "flex", flexDirection: "row" }}>
+        <Box>
+        <input onChange={handleChangeDate} type="date" style={{backgroundColor:'#bcaaa4', border:'none', borderRadius:'1em', height:'2em', width:'10em'}}></input>
+        </Box>
+        
+        <Box sx={{ width: 200 }}>
+          <p>price range</p>
+          <Slider
+            sx={{color: "red"}}
+            getAriaLabel={() => "Temperature range"}
+            value={priceValue}
+            onChange={handleChange}
+            valueLabelDisplay="auto"
+            getAriaValueText={valuetext}
+            max={2000}
+            step={10}
+          />
+        </Box>
+        <p>
+          Between {priceValue[0]} and {priceValue[1]}
+        </p>
+        <Box>
+          <h2>Properties</h2>
+          <div>
+          <FormGroup>
             {initialSelctedOptions.status.map(
               (option, index) =>
                 option && (
                   <FormControlLabel
                     key={index}
                     control={
-                      <Checkbox sx={{ color: "#009688" }}
+                      <Checkbox
                         checked={selectedOptions.status.some(
                           (opt) => opt === option
                         )}
@@ -177,20 +165,9 @@ const handleTypeCheckboxChange =
                 )
             )}
           </FormGroup>
-          </Box>
-          <div
-            style={{
-              height: "90px",
-              width: "0.5px",
-              backgroundColor: "#009688",
-              marginTop: "8px",
-            }}
-          ></div>
-        </Box>
-        <Box sx={{ display: "flex", height: "10em" }}>
-          <Box sx={{ margin: "8px" }}>
-            <Typography variant="h6">Delivery type:</Typography>
-            <FormGroup sx={{ display: "flex", flexDirection: "row" }}>
+          </div>
+          <div>
+          <FormGroup>
             {initialSelctedOptions.orderType.map(
               (option, index) =>
                 option && (
@@ -210,38 +187,27 @@ const handleTypeCheckboxChange =
                 )
             )}
           </FormGroup>
-          </Box>
-          <div
-            style={{
-              height: "90px",
-              width: "0.5px",
-              backgroundColor: "#009688",
-              marginTop: "8px",
-            }}
-          ></div>
+          </div>
         </Box>
-        <Box sx={{ display: "flex", height: "10em" }}>
-          <Stack spacing={3}>
-            <Typography variant="h6">Date:</Typography>
-
-            <input
-              onChange={handleChangeDate}
-              type="date"
-              style={{
-                backgroundColor: "#009688",
-                border: "none",
-                borderRadius: "1em",
-                height: "2em",
-                width: "10em",
-              }}
-            ></input>
-            <Button onClick={handleReset}>reset filters</Button>
-          </Stack>
-        </Box>
-      </Box>
-      <hr color="#009688" style={{ width: "74em" }} />
-      <TableHeader />
-      <Orders filteredOrders={filteredOrders} />
-    </Box>
+      <div>
+        <h2>{category} Category</h2>
+        <Container
+          sx={{ display: "flex", justifyContent: "center", flexWrap: "wrap" }}
+        >
+          {filteredOrders.map((order) => (
+            <div
+              style={{ border: "1px blue solid", width: "300px" }}
+              key={order._id}
+            >
+              <h3>userId: {order.userId}</h3>
+              <h3>status: {order.status}</h3>
+              <h3>orderType: {order.shippingDetails.orderType}</h3>
+            </div>
+          ))}
+        </Container>
+      </div>
+    </div>
   );
-}
+};
+
+export default CategoryPage;
