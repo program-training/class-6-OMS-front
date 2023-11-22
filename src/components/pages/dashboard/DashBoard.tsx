@@ -1,7 +1,6 @@
 import {Box} from "@mui/material";
 import Filters from "./Filters";
 import Header from "./Header"
-import Header from "./Header"
 
 const DashBoard = () => {
 
