@@ -6,6 +6,7 @@ import PageNotFound from "../pages/pageNotFound/PageNotFound";
 //import { useAuth } from "../../utils/useAuth"; // Import your authentication context or hook
 import { useEffect, useState } from "react";
 import React from "react";
+import CategoryPage from "../pages/dashboard/FromSimha";
 
 
 export const MainRoute = () => {
@@ -34,6 +35,8 @@ function MyRouter(): JSX.Element {
           <Route path="*" element={<PageNotFound />} />
           <Route path="/" element={<MainRoute />}></Route>
           <Route path="/orders/dashboard" element={<DashBoard />} />  
+          <Route path="/categories" element={<CategoryPage />} />  
+
       </Routes>
     </Router>
   );
