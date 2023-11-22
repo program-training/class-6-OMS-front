@@ -1,9 +1,9 @@
 import axios from "axios";
 import { BASE_URL } from "./usersServices";
-import { OrderInterfce } from "../interfaces/ordersInterface";
+import { OrderInterface } from "../interfaces/ordersInterface";
 import { handleUnAxiosError } from "./usersServices";
 
-export async function fetchOrders(): Promise<OrderInterfce[] | void> {
+export async function fetchOrders(): Promise<OrderInterface[] | void> {
   try {
     const fullUrl = `${BASE_URL}/orders`;
     const response = await axios.get(fullUrl);
