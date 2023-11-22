@@ -12,7 +12,7 @@ export async function fetchOrders(): Promise<OrderInterface[] | void> {
     handleUnAxiosError(error);
   }
 }
-export async function putOrder(order:OrderInterfce): Promise<OrderInterfce | void> {
+export async function putOrder(order:OrderInterface): Promise<OrderInterface | void> {
   try {
     const fullUrl = `${BASE_URL}/orders/${order._id}`;
     const response = await axios.put(fullUrl,order);
