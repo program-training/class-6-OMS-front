@@ -16,7 +16,7 @@ import { fetchOrders, putOrder } from "../../../services/ordersService";
 import { OrderInterface } from "../../../interfaces/ordersInterface";
 import {
   options,
-  initialSelctedOptions,
+  initialSelctedOptions as initialSelectedOptions,
   tSelectedOptions,
   filterOrdersByPriceRange,
   filterOrdersByDate,
@@ -56,7 +56,7 @@ export default function Table() {
   const [orders, setOrders] = useState<OrderInterface[]>([]);
   const [filteredOrders, setFilteredOrders] = useState<OrderInterface[]>([]);
   const [selectedOptions, setSelectedOptions] = useState<tSelectedOptions>(
-    initialSelctedOptions
+    initialSelectedOptions
   );
 
   async function getOrders() {
@@ -139,12 +139,12 @@ export default function Table() {
     setDateValue(formattedDate);
   };
   const handleReset = () => {
-    setDateValue(initialSelctedOptions.orderTime);
+    setDateValue(initialSelectedOptions.orderTime);
     setPriceValue([
-      initialSelctedOptions.price.minPrice,
-      initialSelctedOptions.price.maxPrice,
+      initialSelectedOptions.price.minPrice,
+      initialSelectedOptions.price.maxPrice,
     ]);
-    setSelectedOptions(initialSelctedOptions);
+    setSelectedOptions(initialSelectedOptions);
   };
   const handleChangeStatusButton = (
     order: OrderInterface,
@@ -186,6 +186,7 @@ export default function Table() {
           aria-describedby="parent-modal-description"
         >
           <Box sx={{ ...style, width: 800 }}>
+
 
             <Box
               sx={{
