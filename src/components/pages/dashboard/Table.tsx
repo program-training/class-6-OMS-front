@@ -7,6 +7,7 @@ import {
   Checkbox,
   Button,
   Stack,
+  Modal,
 } from "@mui/material";
 import Orders from "./Orders";
 import TableHeader from "./TableHeader";
@@ -23,13 +24,33 @@ import {
   filterOrdersByStatus,
 } from "../../../utils/filtersFuncs";
 import { useNavigate } from "react-router";
+import TuneIcon from '@mui/icons-material/Tune';
+import DoneIcon from '@mui/icons-material/Done';
+import RotateLeftRoundedIcon from '@mui/icons-material/RotateLeftRounded';
+
+
+const style = {
+  position: 'absolute' as 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 600,
+  height: 500,
+  bgcolor: '#e0f2f1',
+  border: '2px solid #000',
+  boxShadow: 24,
+  pt: 2,
+  px: 4,
+  pb: 3,
+};
+
 
 function valuetext(value: number) {
   return `${value}$`;
 }
 
 export default function Table() {
-    const Navigate = useNavigate()
+  const Navigate = useNavigate()
   const [priceValue, setPriceValue] = useState<number[]>([0, 2000]);
   const [dateValue, setDateValue] = useState("0000-00-00");
   const [orders, setOrders] = useState<OrderInterface[]>([]);
@@ -43,8 +64,8 @@ export default function Table() {
     if (temp) {
       setOrders(temp);
     }
-    else{
-       Navigate('/orders/login?notLoginPopup=true') 
+    else {
+      Navigate('/orders/login?notLoginPopup=true')
     }
   }
   const filterOrders = (
@@ -94,19 +115,19 @@ export default function Table() {
 
   const handleTypeCheckboxChange =
     (_option: options["orderType"]) =>
-    (event: ChangeEvent<HTMLInputElement>) => {
-      if (event.target.checked) {
-        setSelectedOptions((prevState) => ({
-          ...prevState,
-          orderType: [...prevState.orderType, _option],
-        }));
-      } else {
-        setSelectedOptions((prevState) => ({
-          ...prevState,
-          orderType: prevState.orderType.filter((opt) => opt !== _option),
-        }));
-      }
-    };
+      (event: ChangeEvent<HTMLInputElement>) => {
+        if (event.target.checked) {
+          setSelectedOptions((prevState) => ({
+            ...prevState,
+            orderType: [...prevState.orderType, _option],
+          }));
+        } else {
+          setSelectedOptions((prevState) => ({
+            ...prevState,
+            orderType: prevState.orderType.filter((opt) => opt !== _option),
+          }));
+        }
+      };
   const handleChange = (event: Event, newValue: number | number[]) => {
     if (event) {
       setPriceValue(newValue as number[]);
@@ -140,131 +161,136 @@ export default function Table() {
           setFilteredOrders(updatedOrders);
         }
       }
-      else{
-        Navigate('/orders/login?notLoginPopup=true') 
+      else {
+        Navigate('/orders/login?notLoginPopup=true')
       }
     };
   };
+
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+
   return (
     <Box>
-      <Box
-        sx={{
-          height: "8em",
-          width: "100vw",
-          position: "relative",
-          display: "flex",
-          justifyContent: "space-around",
-        }}
-      >
-        <Box sx={{ display: "flex", height: "10em" }}>
-          <Box sx={{ margin: "8px" }}>
-            <Typography variant="h6">price:</Typography>
-            <Slider
-              sx={{ width: "100px", color: "#009688", marginRight: "5px" }}
-              getAriaLabel={() => "Temperature range"}
-              value={priceValue}
-              onChange={handleChange}
-              valueLabelDisplay="auto"
-              getAriaValueText={valuetext}
-              max={2000}
-              step={10}
-            />
-          </Box>
-          <div
-            style={{
-              height: "90px",
-              width: "0.5px",
-              backgroundColor: "#009688",
-              marginTop: "8px",
-            }}
-          ></div>
-        </Box>
-        <Box sx={{ display: "flex", height: "10em" }}>
-          <Box sx={{ margin: "8px" }}>
-            <Typography variant="h6">status:</Typography>
-            <FormGroup sx={{ display: "flex", flexDirection: "row" }}>
-              {initialSelectedOptions.status.map(
-                (option, index) =>
-                  option && (
-                    <FormControlLabel
-                      key={index}
-                      control={
-                        <Checkbox
-                          sx={{ color: "#009688" }}
-                          checked={selectedOptions.status.some(
-                            (opt) => opt === option
-                          )}
-                          onChange={handleStatusCheckboxChange(option)}
-                        />
-                      }
-                      label={option}
-                    />
-                  )
-              )}
-            </FormGroup>
-          </Box>
-          <div
-            style={{
-              height: "90px",
-              width: "0.5px",
-              backgroundColor: "#009688",
-              marginTop: "8px",
-            }}
-          ></div>
-        </Box>
-        <Box sx={{ display: "flex", height: "10em" }}>
-          <Box sx={{ margin: "8px" }}>
-            <Typography variant="h6">Delivery type:</Typography>
-            <FormGroup sx={{ display: "flex", flexDirection: "row" }}>
-              {initialSelectedOptions.orderType.map(
-                (option, index) =>
-                  option && (
-                    <FormControlLabel
-                      key={index}
-                      control={
-                        <Checkbox
-                          checked={selectedOptions.orderType.some(
-                            (opt) => opt === option
-                          )}
-                          onChange={handleTypeCheckboxChange(option)}
-                        />
-                      }
-                      label={option}
-                    />
-                  )
-              )}
-            </FormGroup>
-          </Box>
-          <div
-            style={{
-              height: "90px",
-              width: "0.5px",
-              backgroundColor: "#009688",
-              marginTop: "8px",
-            }}
-          ></div>
-        </Box>
-        <Box sx={{ display: "flex", height: "10em" }}>
-          <Stack spacing={3}>
-            <Typography variant="h6">Date:</Typography>
+      <Box>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="parent-modal-title"
+          aria-describedby="parent-modal-description"
+        >
+          <Box sx={{ ...style, width: 800 }}>
 
-            <input
-              onChange={handleChangeDate}
-              type="date"
-              style={{
-                backgroundColor: "#009688",
-                border: "none",
-                borderRadius: "1em",
-                height: "2em",
-                width: "10em",
+
+            <Box
+              sx={{
+                height: "8em",
+                width: "100vw",
+                position: "relative",
+                display: "flex",
+                flexDirection:'column'
               }}
-            ></input>
-            <Button onClick={handleReset}>reset filters</Button>
-          </Stack>
+            >
+              <Box><Typography style={{ fontWeight: 900 }} sx={{textDecoration:'underLine'}}>Filters:</Typography></Box>
+              <Box sx={{ display: "flex", height: "10em", width: '25em' }}>
+                <Box sx={{ margin: "8px" }}>
+                  <Typography variant="h6" style={{ fontWeight: 900 }} sx={{ width: '2.5em' }}>price:</Typography>
+                  <Slider
+                    sx={{ width: "12em", color: "#009688", marginLeft: "1em", marginTop: '0.5em' }}
+                    getAriaLabel={() => "Temperature range"}
+                    value={priceValue}
+                    onChange={handleChange}
+                    valueLabelDisplay="auto"
+                    getAriaValueText={valuetext}
+                    max={2000}
+                    step={10}
+                  />
+                </Box>
+              </Box>
+
+              <Box sx={{ display: "flex", height: "10em", width: '25em' }}>
+                <Box sx={{ margin: "8px" }}>
+                  <Typography variant="h6" style={{ fontWeight: 900 }} sx={{ width: '25em' }}>status:</Typography>
+                  <FormGroup sx={{ display: "flex", flexDirection: "row" }}>
+                    {initialSelctedOptions.status.map(
+                      (option, index) =>
+                        option && (
+                          <FormControlLabel
+                            key={index}
+                            control={
+                              <Checkbox sx={{ color: "#009688" }}
+                                checked={selectedOptions.status.some(
+                                  (opt) => opt === option
+                                )}
+
+                                onChange={handleStatusCheckboxChange(option)}
+                              />
+                            }
+                            label={option}
+                          />
+                        )
+                    )}
+                  </FormGroup>
+                </Box>
+              </Box>
+
+              <Box sx={{ display: "flex", height: "10em", width: '25em' }}>
+                <Box sx={{ margin: "8px" }}>
+                  <Typography noWrap variant="h6" style={{ fontWeight: 900 }} sx={{ width: '9em' }}>Delivery type:</Typography>
+                  <FormGroup sx={{ display: "flex", flexDirection: "row" }}>
+                    {initialSelctedOptions.orderType.map(
+                      (option, index) =>
+                        option && (
+                          <FormControlLabel
+                            key={index}
+                            control={
+                              <Checkbox
+                                checked={selectedOptions.orderType.some(
+                                  (opt) => opt === option
+                                )}
+
+                                onChange={handleTypeCheckboxChange(option)}
+                              />
+                            }
+                            label={option}
+                          />
+                        )
+                    )}
+                  </FormGroup>
+                </Box>
+              </Box>
+              <Box sx={{ display: "flex", height: "10em",marginLeft:'0.5em' }}>
+                <Stack spacing={3}>
+                  <Typography variant="h6" style={{ fontWeight: 900 }} >Date:</Typography>
+
+                  <input
+                    onChange={handleChangeDate}
+                    type="date"
+                    style={{ backgroundColor: "#009688",fontFamily:'sans-serif', border: "none", borderRadius: "1em", height: "2em", width: "15em", marginLeft: '2em', padding: '0.5em' }}
+                  ></input>
+                </Stack>
+              </Box>
+              <Box sx={{ marginTop: '3em' }}>
+                <Button startIcon={<DoneIcon />} sx={{ color: 'black', width: '9em', backgroundColor: '#009688', '&:hover': { backgroundColor: '#80cbc4' } }} onClick={handleClose}>Done</Button>
+              </Box>
+            </Box>
+
+          </Box>
+        </Modal>
+      </Box>
+      <Box sx={{ width: '100vw', height: '3em', display: 'flex', alignItems: 'center', marginTop: '2em' }}>
+        <TableHeader />
+        <Box sx={{ display: 'flex', width: '40em' }}>
+          <Button onClick={handleOpen} sx={{ color: 'white', border: 'none', width: '9em',backgroundColor:'#26a69a', '&:hover': { border: 'none', backgroundColor:'#80cbc4' } }} startIcon={<TuneIcon />}>Filters</Button>
+          <Button variant="outlined" onClick={handleReset} sx={{ color: 'white', border: 'none',backgroundColor:'#26a69a',marginLeft:'0.5em' ,'&:hover': { border: 'none', backgroundColor:'#80cbc4' } }} startIcon={<RotateLeftRoundedIcon sx={{ color: 'white' }} />}>reset filters</Button>
         </Box>
       </Box>
-      <hr color="#009688" style={{ width: "74em" }} />
-      <TableHeader />
       <Orders filteredOrders={filteredOrders} handleChangeStatus={handleChangeStatusButton} />
     </Box>
   );

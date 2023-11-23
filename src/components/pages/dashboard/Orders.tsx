@@ -27,12 +27,12 @@ function Orders({filteredOrders, handleChangeStatus}:oProps) {
                             </Box>
                             <Box sx={{ display: 'flex', width: '20vw', justifyContent: 'center', alignItems: 'center' }}>
                                 <Box>
-                                    <Button variant="outlined" disabled={order.status !== 'processing'} onClick={handleChangeStatus(order, 'cancelled')} sx={{ color: 'black', border: 'none' }} startIcon={<Clear sx={{ color: '#004d40', margin: '0.8px' }} />}>
+                                    <Button variant="outlined" disabled={order.status !== 'processing'} onClick={handleChangeStatus(order, 'cancelled')} sx={{ color: 'black', border: 'none', marginLeft:'-0.5em', backgroundColor:'#26a69a','&:hover':{border:'none',backgroundColor:'#4db6ac'}}} startIcon={<Clear sx={{ color: '#004d40', margin: '0.8px'}} />}>
                                         cancel
                                     </Button>
                                 </Box>
                                 <Box>
-                                    <Button variant="outlined" disabled={order.shippingDetails.orderType !== 'pickup' || order.status !== 'processing'} onClick={handleChangeStatus(order, 'accepted')} sx={{ color: 'black', border: 'none' }} startIcon={<ChangeCircle sx={{ color: '#004d40', margin: '0.8px' }} />}>
+                                    <Button variant="outlined" disabled={order.shippingDetails.orderType !== 'pickup' || order.status !== 'processing'} onClick={handleChangeStatus(order, 'accepted')} sx={{ color: 'black', border: 'none', marginLeft:'0.5em', backgroundColor:'#26a69a','&:hover':{border:'none',backgroundColor:'#4db6ac'} }} startIcon={<ChangeCircle sx={{ color: '#004d40', margin: '0.8px' }} />}>
                                         complete 
                                     </Button>
                                 </Box>
@@ -40,9 +40,9 @@ function Orders({filteredOrders, handleChangeStatus}:oProps) {
                         </AccordionSummary>
                         <AccordionDetails>
                             <Typography>
-                                <Typography>shipping address: {order.shippingDetails.address}</Typography>
-                                <Typography>contact number: {order.shippingDetails.contactNumber}</Typography>
-                                <Typography> delivery type: {order.shippingDetails.orderType}</Typography>
+                                <Typography style={{ fontWeight: 600 }}>shipping address: {order.shippingDetails.address}</Typography>
+                                <Typography style={{ fontWeight: 600 }}>contact number: {order.shippingDetails.contactNumber}</Typography>
+                                <Typography style={{ fontWeight: 600 }}> delivery type: {order.shippingDetails.orderType}</Typography>
                             </Typography>
                         </AccordionDetails>
                     </Accordion>
