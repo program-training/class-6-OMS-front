@@ -2,10 +2,11 @@ import {Box, createTheme, ThemeProvider}  from "@mui/material";
 import Filters from "./Filters";
 import Header from "./Header"
 import Table from "./Table";
-import SignUp from "../register/SignUp";
-import { useState } from "react";
-
-
+// import { useNavigate } from "react-router";
+// import { useEffect } from "react";
+// interface rProps{
+//   isAuthenticated: boolean
+// }
 
 const theme = createTheme({
   typography: {
@@ -13,17 +14,12 @@ const theme = createTheme({
   }
 });
 const DashBoard = () => {
-  const [openSignUp, setOpenSignUp] = useState(false);
-
-  const openPopUp = () => {
-    setOpenSignUp(true);
-  };
- const closePopUp =() => {
-  setOpenSignUp(false)
- }
- 
- 
-
+  // const Navigate = useNavigate()
+  // useEffect(()=>{
+  //   if (!isAuthenticated) {
+  //     Navigate('/orders/login')
+  //   }
+  // },[])
   return (
     <ThemeProvider theme={theme}>
     <Box sx={{ bgcolor: '#e0f2f1', minHeight: '100vh', height: '100vh', width: '100vw', margin: '0', position: 'absolute' }}>

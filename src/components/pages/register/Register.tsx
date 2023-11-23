@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { CircularProgress, Typography } from '@mui/material';
 import {
   TextField,
@@ -28,16 +28,16 @@ import { useNavigate } from "react-router-dom";
 //   open: boolean;
 //   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 // }
-interface rProps{
-  isAuthenticated: boolean
-}
-const Register = ({isAuthenticated}:rProps) => {
-  const Navigate = useNavigate()
-  useEffect(()=>{
-    if (!isAuthenticated) {
-      Navigate('/orders/login')
-    }
-  },[])
+// interface rProps{
+//   isAuthenticated: boolean
+// }
+const Register = () => {
+   const Navigate = useNavigate()
+  // useEffect(()=>{
+  //   if (!isAuthenticated) {
+  //     Navigate('/orders/login')
+  //   }
+  // },[])
   const [showPassword, setShowPassword] = React.useState(false);
 
   //Inputs
@@ -93,7 +93,11 @@ const Register = ({isAuthenticated}:rProps) => {
         setTimeout(async () => {
           Navigate('/orders/dashboard')
         }, 2000);
-      }  
+      }
+    else if (status === 401 || status === 400){
+        Navigate('/orders/login')
+        alert('you are not log-in please re log-in')
+    }  
     else {
       setLoading(false)
       setFormValid("oops somthing get wrong try again");

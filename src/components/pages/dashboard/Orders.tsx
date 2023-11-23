@@ -1,16 +1,15 @@
 import { ChangeCircle, Clear, ExpandMore } from '@mui/icons-material'
 import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Typography } from '@mui/material'
 import { OrderInterface } from '../../../interfaces/ordersInterface';
+import { options } from '../../../utils/filtersFuncs';
 
 
 interface oProps{
     filteredOrders : OrderInterface[]
+    handleChangeStatus: (order: OrderInterface, _status: options["status"]) => (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => Promise<void>
 }
-function Orders({filteredOrders}:oProps) {
+function Orders({filteredOrders, handleChangeStatus}:oProps) {
 
-    const handleButtonClick = (event:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        event.stopPropagation();
-    };
 
     return (
         <Box sx={{ width: '100vw', minHeight: '50vh', display: 'flex', justifyItems: 'center', flexDirection: 'column' }}>
@@ -28,13 +27,13 @@ function Orders({filteredOrders}:oProps) {
                             </Box>
                             <Box sx={{ display: 'flex', width: '20vw', justifyContent: 'center', alignItems: 'center' }}>
                                 <Box>
-                                    <Button variant="outlined" onClick={handleButtonClick} sx={{ color: 'black', border: 'none' }} startIcon={<Clear sx={{ color: '#004d40', margin: '0.8px' }} />}>
-                                        Details
+                                    <Button variant="outlined" disabled={order.status !== 'processing'} onClick={handleChangeStatus(order, 'cancelled')} sx={{ color: 'black', border: 'none' }} startIcon={<Clear sx={{ color: '#004d40', margin: '0.8px' }} />}>
+                                        cancel
                                     </Button>
                                 </Box>
                                 <Box>
-                                    <Button variant="outlined" onClick={handleButtonClick} sx={{ color: 'black', border: 'none' }} startIcon={<ChangeCircle sx={{ color: '#004d40', margin: '0.8px' }} />}>
-                                        exchange
+                                    <Button variant="outlined" disabled={order.shippingDetails.orderType !== 'pickup' || order.status !== 'processing'} onClick={handleChangeStatus(order, 'accepted')} sx={{ color: 'black', border: 'none' }} startIcon={<ChangeCircle sx={{ color: '#004d40', margin: '0.8px' }} />}>
+                                        complete 
                                     </Button>
                                 </Box>
                             </Box>

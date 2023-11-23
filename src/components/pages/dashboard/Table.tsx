@@ -11,7 +11,7 @@ import {
 import Orders from "./Orders";
 import TableHeader from "./TableHeader";
 import { ChangeEvent, useEffect, useState } from "react";
-import { fetchOrders } from "../../../services/ordersService";
+import { fetchOrders, putOrder } from "../../../services/ordersService";
 import { OrderInterface } from "../../../interfaces/ordersInterface";
 import {
   options,
@@ -22,12 +22,14 @@ import {
   filterOrdersByOrderType,
   filterOrdersByStatus,
 } from "../../../utils/filtersFuncs";
+import { useNavigate } from "react-router";
 
 function valuetext(value: number) {
   return `${value}$`;
 }
 
 export default function Table() {
+    const Navigate = useNavigate()
   const [priceValue, setPriceValue] = useState<number[]>([0, 2000]);
   const [dateValue, setDateValue] = useState("0000-00-00");
   const [orders, setOrders] = useState<OrderInterface[]>([]);
@@ -40,6 +42,9 @@ export default function Table() {
     const temp: void | OrderInterface[] = await fetchOrders();
     if (temp) {
       setOrders(temp);
+    }
+    else{
+       Navigate('/orders/login?notLoginPopup=true') 
     }
   }
   const filterOrders = (
@@ -73,34 +78,35 @@ export default function Table() {
     filterOrders(orders, selectedOptions);
   }, [priceValue, orders, selectedOptions, dateValue]);
   const handleStatusCheckboxChange =
-  (_option: options["status"]) => (event: ChangeEvent<HTMLInputElement>) => {
-    if (event.target.checked) {
-      setSelectedOptions((prevState) => ({
-        ...prevState,
-        status: [...prevState.status, _option],
-      }));
-    } else {
-      setSelectedOptions((prevState) => ({
-        ...prevState,
-        status: prevState.status.filter((opt) => opt !== _option),
-      }));
-    }
-  };
+    (_option: options["status"]) => (event: ChangeEvent<HTMLInputElement>) => {
+      if (event.target.checked) {
+        setSelectedOptions((prevState) => ({
+          ...prevState,
+          status: [...prevState.status, _option],
+        }));
+      } else {
+        setSelectedOptions((prevState) => ({
+          ...prevState,
+          status: prevState.status.filter((opt) => opt !== _option),
+        }));
+      }
+    };
 
-const handleTypeCheckboxChange =
-  (_option: options["orderType"]) => (event: ChangeEvent<HTMLInputElement>) => {
-    if (event.target.checked) {
-      setSelectedOptions((prevState) => ({
-        ...prevState,
-        orderType: [...prevState.orderType, _option],
-      }));
-    } else {
-      setSelectedOptions((prevState) => ({
-        ...prevState,
-        orderType: prevState.orderType.filter((opt) => opt !== _option),
-      }));
-    }
-  };
+  const handleTypeCheckboxChange =
+    (_option: options["orderType"]) =>
+    (event: ChangeEvent<HTMLInputElement>) => {
+      if (event.target.checked) {
+        setSelectedOptions((prevState) => ({
+          ...prevState,
+          orderType: [...prevState.orderType, _option],
+        }));
+      } else {
+        setSelectedOptions((prevState) => ({
+          ...prevState,
+          orderType: prevState.orderType.filter((opt) => opt !== _option),
+        }));
+      }
+    };
   const handleChange = (event: Event, newValue: number | number[]) => {
     if (event) {
       setPriceValue(newValue as number[]);
@@ -119,7 +125,26 @@ const handleTypeCheckboxChange =
     ]);
     setSelectedOptions(initialSelctedOptions);
   };
-
+  const handleChangeStatusButton = (
+    order: OrderInterface,
+    _status: options["status"]
+  ) => {
+    return async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+      e.stopPropagation();
+      const updatedOrder = await putOrder({ ...order, status: _status });
+      if (updatedOrder?.status === _status) {
+        const index = filteredOrders.findIndex((o) => o._id === order._id);
+        if (index !== -1) {
+          const updatedOrders = [...filteredOrders];
+          updatedOrders[index] = updatedOrder;
+          setFilteredOrders(updatedOrders);
+        }
+      }
+      else{
+        Navigate('/orders/login?notLoginPopup=true') 
+      }
+    };
+  };
   return (
     <Box>
       <Box
@@ -158,25 +183,25 @@ const handleTypeCheckboxChange =
           <Box sx={{ margin: "8px" }}>
             <Typography variant="h6">status:</Typography>
             <FormGroup sx={{ display: "flex", flexDirection: "row" }}>
-            {initialSelctedOptions.status.map(
-              (option, index) =>
-                option && (
-                  <FormControlLabel
-                    key={index}
-                    control={
-                      <Checkbox sx={{ color: "#009688" }}
-                        checked={selectedOptions.status.some(
-                          (opt) => opt === option
-                        )}
-                        
-                        onChange={handleStatusCheckboxChange(option)}
-                      />
-                    }
-                    label={option}
-                  />
-                )
-            )}
-          </FormGroup>
+              {initialSelctedOptions.status.map(
+                (option, index) =>
+                  option && (
+                    <FormControlLabel
+                      key={index}
+                      control={
+                        <Checkbox
+                          sx={{ color: "#009688" }}
+                          checked={selectedOptions.status.some(
+                            (opt) => opt === option
+                          )}
+                          onChange={handleStatusCheckboxChange(option)}
+                        />
+                      }
+                      label={option}
+                    />
+                  )
+              )}
+            </FormGroup>
           </Box>
           <div
             style={{
@@ -191,25 +216,24 @@ const handleTypeCheckboxChange =
           <Box sx={{ margin: "8px" }}>
             <Typography variant="h6">Delivery type:</Typography>
             <FormGroup sx={{ display: "flex", flexDirection: "row" }}>
-            {initialSelctedOptions.orderType.map(
-              (option, index) =>
-                option && (
-                  <FormControlLabel
-                    key={index}
-                    control={
-                      <Checkbox
-                        checked={selectedOptions.orderType.some(
-                          (opt) => opt === option
-                        )}
-                        
-                        onChange={handleTypeCheckboxChange(option)}
-                      />
-                    }
-                    label={option}
-                  />
-                )
-            )}
-          </FormGroup>
+              {initialSelctedOptions.orderType.map(
+                (option, index) =>
+                  option && (
+                    <FormControlLabel
+                      key={index}
+                      control={
+                        <Checkbox
+                          checked={selectedOptions.orderType.some(
+                            (opt) => opt === option
+                          )}
+                          onChange={handleTypeCheckboxChange(option)}
+                        />
+                      }
+                      label={option}
+                    />
+                  )
+              )}
+            </FormGroup>
           </Box>
           <div
             style={{
@@ -241,7 +265,7 @@ const handleTypeCheckboxChange =
       </Box>
       <hr color="#009688" style={{ width: "74em" }} />
       <TableHeader />
-      <Orders filteredOrders={filteredOrders} />
+      <Orders filteredOrders={filteredOrders} handleChangeStatus={handleChangeStatusButton} />
     </Box>
   );
 }
