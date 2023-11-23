@@ -1,42 +1,23 @@
-import { BrowserRouter as Router, Routes, Route , useNavigate} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import DashBoard from "../pages/dashboard/DashBoard";
 import Register from "../pages/register/Register";
 import Login from "../pages/login/Login";
 import PageNotFound from "../pages/pageNotFound/PageNotFound";
+import { MainRoute } from "../pages/sharedPages/MainRoute";
+// import { useAuth } from "../../utils/useAuth";
 //import { useAuth } from "../../utils/useAuth"; // Import your authentication context or hook
-import { useEffect, useState } from "react";
-import React from "react";
-import CategoryPage from "../pages/dashboard/FromSimha";
 
 
-export const MainRoute = () => {
-  const navigate = useNavigate();
-  const  isAuthenticated  = true;
-  useEffect(() => {
-    if (!isAuthenticated) {
-      navigate("/orders/login");
-    }
-    else{
-      navigate("/orders/dashboard");
-    }
-  },[])
-  return (
-    <React.Fragment>
-    </React.Fragment>
-  );
-};
+
 function MyRouter(): JSX.Element {
-  const [isAuthenticated] = useState(true);
   return (
     <Router>
       <Routes>
           <Route path="/orders/login" element={<Login/>} />
-          <Route path="/orders/register" element={<Register isAuthenticated={isAuthenticated}/>} />
+          <Route path="/orders/register" element={<Register/>} />
           <Route path="*" element={<PageNotFound />} />
           <Route path="/" element={<MainRoute />}></Route>
-          <Route path="/orders/dashboard" element={<DashBoard />} />  
-          <Route path="/categories" element={<CategoryPage />} />  
-
+          <Route path="/orders/dashboard" element={<DashBoard/>} />  
       </Routes>
     </Router>
   );

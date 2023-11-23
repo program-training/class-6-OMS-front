@@ -21,7 +21,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import LoginIcon from "@mui/icons-material/Login";
 import { loginUser } from "../../../services/usersServices";
 import loginValidation from "../../../utils/loginValidation";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 // interface dProps {
 //   open: boolean;
@@ -29,6 +29,11 @@ import { useNavigate } from "react-router-dom";
 // }
 const Login = () => {
   const Navigate = useNavigate()
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+
+  const popUpNotLogin = queryParams.get('notLoginPopup');
+  console.log(popUpNotLogin);
   const [showPassword, setShowPassword] = React.useState(false);
 
   //Inputs
