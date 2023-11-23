@@ -15,7 +15,7 @@ export  interface tSelectedOptions {
     orderTime: string;
   }
   
-export const initialSelctedOptions: tSelectedOptions = {
+export const initialSelectedOptions: tSelectedOptions = {
     orderType: ["express", "regular", "pickup"],
     status: ["processing", "sent", "accepted", "cancelled"],
     price: { minPrice: 0, maxPrice: 2000 },
