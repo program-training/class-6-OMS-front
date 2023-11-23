@@ -1,6 +1,7 @@
 import axios, { AxiosError } from "axios";
-export const BASE_URL = 'http://localhost:8181/api'
 import UserInterface from "../interfaces/userInterface";
+const HOST = import.meta.env.VITE_SERVER_HOST || "http://localhost:8181"
+export const BASE_URL = `${HOST}/api`
 
 export const handleUnAxiosError = (error: AxiosError | unknown): void | 401 => {
     if (axios.isAxiosError(error)) {
