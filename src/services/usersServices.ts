@@ -45,7 +45,7 @@ export async function loginUser( user: Partial<UserInterface>): Promise<string |
       };
       console.log("from services: ", user);
       const response = await axios.post(`${BASE_URL}/register`, user, config);
-      console.log(response.data.message);
+      console.log(response.data.status);
       return response.status;
     } catch (error) {
       handleUnAxiosError(error);

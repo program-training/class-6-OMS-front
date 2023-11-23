@@ -15,7 +15,7 @@ import { fetchOrders, putOrder } from "../../../services/ordersService";
 import { OrderInterface } from "../../../interfaces/ordersInterface";
 import {
   options,
-  initialSelctedOptions,
+  initialSelctedOptions as initialSelectedOptions,
   tSelectedOptions,
   filterOrdersByPriceRange,
   filterOrdersByDate,
@@ -35,7 +35,7 @@ export default function Table() {
   const [orders, setOrders] = useState<OrderInterface[]>([]);
   const [filteredOrders, setFilteredOrders] = useState<OrderInterface[]>([]);
   const [selectedOptions, setSelectedOptions] = useState<tSelectedOptions>(
-    initialSelctedOptions
+    initialSelectedOptions
   );
 
   async function getOrders() {
@@ -118,12 +118,12 @@ export default function Table() {
     setDateValue(formattedDate);
   };
   const handleReset = () => {
-    setDateValue(initialSelctedOptions.orderTime);
+    setDateValue(initialSelectedOptions.orderTime);
     setPriceValue([
-      initialSelctedOptions.price.minPrice,
-      initialSelctedOptions.price.maxPrice,
+      initialSelectedOptions.price.minPrice,
+      initialSelectedOptions.price.maxPrice,
     ]);
-    setSelectedOptions(initialSelctedOptions);
+    setSelectedOptions(initialSelectedOptions);
   };
   const handleChangeStatusButton = (
     order: OrderInterface,
@@ -183,7 +183,7 @@ export default function Table() {
           <Box sx={{ margin: "8px" }}>
             <Typography variant="h6">status:</Typography>
             <FormGroup sx={{ display: "flex", flexDirection: "row" }}>
-              {initialSelctedOptions.status.map(
+              {initialSelectedOptions.status.map(
                 (option, index) =>
                   option && (
                     <FormControlLabel
@@ -216,7 +216,7 @@ export default function Table() {
           <Box sx={{ margin: "8px" }}>
             <Typography variant="h6">Delivery type:</Typography>
             <FormGroup sx={{ display: "flex", flexDirection: "row" }}>
-              {initialSelctedOptions.orderType.map(
+              {initialSelectedOptions.orderType.map(
                 (option, index) =>
                   option && (
                     <FormControlLabel
