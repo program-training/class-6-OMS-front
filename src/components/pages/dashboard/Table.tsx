@@ -11,11 +11,11 @@ function Table() {
     return (
         <Box sx={{ height: '100vh', minHeight: '80vh', width: '100vw', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <Box sx={{ height: '3em', display: 'flex', justifyContent: "space-around", width: '75em' }}>
-                <Typography variant="h5">id</Typography>
-                <Typography variant="h5">price</Typography>
-                <Typography variant="h5">date</Typography>
-                <Typography variant="h5">delivery</Typography>
-                <Typography variant="h5">status</Typography>
+                <Typography variant="h5">Id</Typography>
+                <Typography variant="h5">Price</Typography>
+                <Typography variant="h5">Date</Typography>
+                <Typography variant="h5">Delivery</Typography>
+                <Typography variant="h5">Status</Typography>
             </Box>
             <Box sx={{ border: 'black solid 1px', width: '90vw', minHeight: '50vh' }}>
                 {array.map(() => (
@@ -35,7 +35,7 @@ function Table() {
                         </Box>
                         <Box>
                             <Button variant="outlined" sx={{ color: '#6d4c41', border: 'none' }} startIcon={<Cancel sx={{ color: '#6d4c41' }} />}>
-                                cancelle
+                                Cancel
                             </Button>
                         </Box>
                         

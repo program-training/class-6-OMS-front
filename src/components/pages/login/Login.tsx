@@ -12,6 +12,8 @@ import {
   Stack,
   Grid,
   Box,
+  createTheme,
+  ThemeProvider
 } from "@mui/material";
 import { teal } from '@mui/material/colors';
 
@@ -25,10 +27,11 @@ import { loginUser } from "../../../services/usersServices";
 import loginValidation from "../../../utils/loginValidation";
 import { useNavigate } from "react-router-dom";
 
-// interface dProps {
-//   open: boolean;
-//   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-// }
+const theme = createTheme({
+  typography: {
+      fontFamily: 'Barlow, sans-serif'
+  }
+});
 
 const Login = () => {
   const Navigate = useNavigate()
@@ -86,7 +89,7 @@ const Login = () => {
   };
   return (
 
-
+    <ThemeProvider theme={theme}>
     <Box sx={{
       width: '100vw',
       height: '100vh',
@@ -186,6 +189,7 @@ const Login = () => {
         </Grid>
       </Grid>
     </Box>
+    </ThemeProvider>
   );
 };
 
