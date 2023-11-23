@@ -16,7 +16,7 @@ import { fetchOrders, putOrder } from "../../../services/ordersService";
 import { OrderInterface } from "../../../interfaces/ordersInterface";
 import {
   options,
-  initialSelctedOptions as initialSelectedOptions,
+  initialSelectedOptions,
   tSelectedOptions,
   filterOrdersByPriceRange,
   filterOrdersByDate,
@@ -30,7 +30,7 @@ import RotateLeftRoundedIcon from '@mui/icons-material/RotateLeftRounded';
 
 
 const style = {
-  position: 'absolute' as 'absolute',
+  position: 'absolute' ,
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
@@ -218,7 +218,7 @@ export default function Table() {
                 <Box sx={{ margin: "8px" }}>
                   <Typography variant="h6" style={{ fontWeight: 900 }} sx={{ width: '25em' }}>status:</Typography>
                   <FormGroup sx={{ display: "flex", flexDirection: "row" }}>
-                    {initialSelctedOptions.status.map(
+                    {initialSelectedOptions.status.map(
                       (option, index) =>
                         option && (
                           <FormControlLabel
@@ -244,7 +244,7 @@ export default function Table() {
                 <Box sx={{ margin: "8px" }}>
                   <Typography noWrap variant="h6" style={{ fontWeight: 900 }} sx={{ width: '9em' }}>Delivery type:</Typography>
                   <FormGroup sx={{ display: "flex", flexDirection: "row" }}>
-                    {initialSelctedOptions.orderType.map(
+                    {initialSelectedOptions.orderType.map(
                       (option, index) =>
                         option && (
                           <FormControlLabel
