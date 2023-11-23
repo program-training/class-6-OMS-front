@@ -1,5 +1,7 @@
 import { ExitToApp, PersonAdd } from "@mui/icons-material"
 import { AppBar, Box, Button, Typography } from "@mui/material"
+import '../../../index.css'
+
 
 interface HeaderProps {
     openSignUp: () => void;
@@ -18,8 +20,12 @@ const Header: React.FC<HeaderProps> = ({ openSignUp }) => {
                 <Typography variant="h4" fontFamily={'Barlow'} fontStyle={'italic'}>ORDER MANAGEMENT SYSTEM </Typography>
             </Box>
             <Box>
-                <Button size="large" variant="contained" sx={{ backgroundColor: '#4db6ac', color: 'white'  }} onClick={openSignUp}><PersonAdd />  Add admin</Button>
-                <Button size="large" variant="contained"  sx={{ml:'1em', backgroundColor: '#4db6ac', color: 'white' }}><ExitToApp /> Sign out</Button>
+                <Button size="large" variant="contained" sx={{ backgroundColor: '#4db6ac', color: 'white' , '&:hover': {
+                      backgroundColor: '#80cbc4'
+                    } }} onClick={openSignUp}><PersonAdd />  Add admin</Button>
+                <Button size="large" variant="contained"  sx={{ml:'1em', backgroundColor: '#4db6ac', color: 'white', '&:hover': {
+                      backgroundColor: '#80cbc4'
+                    } }}><ExitToApp /> Sign out</Button>
             </Box>
         </AppBar>
     )
