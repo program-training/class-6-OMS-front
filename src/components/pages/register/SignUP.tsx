@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
     CircularProgress,
@@ -58,6 +58,8 @@ const SignUp = ({ open, handleClose }:SignUpProps) => {
         const [formValid, setFormValid] = useState<null | string>();
         const [success, setSuccess] = useState<null | string>();
         const [loading, setLoading] = useState<boolean>(false);
+        const [timeoutId, setTimeoutId] = useState<number | null>(null);
+
 
 
 
@@ -98,9 +100,10 @@ const SignUp = ({ open, handleClose }:SignUpProps) => {
             if (status === 200) {
                 setLoading(false)
                 setSuccess("user added successfully");
-                setTimeout(async () => {
-                  Navigate('/orders/dashboard')
-                }, 2000);
+                const id = setTimeout(async () => {
+                    handleClose()
+                }, 1500);
+                setTimeoutId(id)
               }
             else if (status === 401 || status === 400){
                 Navigate('/orders/login')
@@ -112,6 +115,13 @@ const SignUp = ({ open, handleClose }:SignUpProps) => {
             }
           };
     
+          useEffect(() => {
+            return () => {
+              if (timeoutId) {
+                clearTimeout(timeoutId);
+              }
+            };
+          }, [timeoutId]);
         
         
         return (
