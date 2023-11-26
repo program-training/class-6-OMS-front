@@ -40,6 +40,7 @@ function Orders({filteredOrders, handleChangeStatus}:oProps) {
                         </AccordionSummary>
                         <AccordionDetails>
                             <Typography>
+                                <Typography style={{ fontWeight: 500 , fontSize: '1.2rem'}}>order id: {order._id}</Typography>
                                 <Typography style={{ fontWeight: 500 , fontSize: '1.2rem'}}>shipping address: {order.shippingDetails.address}</Typography>
                                 <Typography style={{ fontWeight: 500 , fontSize: '1.2rem'}}>contact number: {order.shippingDetails.contactNumber}</Typography>
                                 <Typography style={{ fontWeight: 500 , fontSize: '1.2rem'}}> delivery type: {order.shippingDetails.orderType}</Typography>
