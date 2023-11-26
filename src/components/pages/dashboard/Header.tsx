@@ -1,6 +1,7 @@
 import { ExitToApp, PersonAdd } from "@mui/icons-material"
 import { AppBar, Box, Button, Typography } from "@mui/material"
 import '../../../index.css'
+import { useNavigate } from "react-router";
 
 
 interface HeaderProps {
@@ -8,7 +9,11 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ openSignUp }) => {
-
+    const Navigate = useNavigate()
+    const handleLogOut = () => {
+        localStorage.removeItem('access_token');
+        Navigate('/orders/login')
+    }
 
 
     return (
@@ -25,7 +30,7 @@ const Header: React.FC<HeaderProps> = ({ openSignUp }) => {
                     } }} onClick={openSignUp}><PersonAdd />  Add admin</Button>
                 <Button size="large" variant="contained"  sx={{ml:'1em', backgroundColor: '#4db6ac', color: 'white', '&:hover': {
                       backgroundColor: '#80cbc4'
-                    } }}><ExitToApp /> Sign out</Button>
+                    } }} onClick={handleLogOut}><ExitToApp /> Sign out</Button>
             </Box>
         </AppBar>
     )

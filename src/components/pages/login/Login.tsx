@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CircularProgress, Typography } from '@mui/material';
 import {
   TextField,
@@ -50,7 +50,7 @@ const Login = () => {
   const [formValid, setFormValid] = useState<null | string>();
   const [success, setSuccess] = useState<null | string>();
   const [loading, setLoading] = useState<boolean>(false);
-
+  const [timeoutId, setTimeoutId] = useState<number | null>(null);
 
 
 
@@ -83,15 +83,24 @@ const Login = () => {
       localStorage.setItem("access_token", token);
       setLoading(false)
       setSuccess("you are connected");
-      setTimeout(async () => {
+      const id = setTimeout(async () => {
         Navigate('/orders/dashboard')
-      }, 2000);
+      }, 1500);
+      setTimeoutId(id)
     }
     else {
       setLoading(false)
       setFormValid("oops something get wrong try again");
     }
   };
+  useEffect(() => {
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
+  }, [timeoutId]);
+
   return (
 
     <ThemeProvider theme={theme}>
