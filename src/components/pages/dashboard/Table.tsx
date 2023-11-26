@@ -8,6 +8,7 @@ import {
   Button,
   Stack,
   Modal,
+  CircularProgress,
 } from "@mui/material";
 import Orders from "./Orders";
 import TableHeader from "./TableHeader";
@@ -291,6 +292,11 @@ export default function Table() {
           <Button variant="outlined" onClick={handleReset} sx={{ color: 'white', border: 'none',backgroundColor:'#26a69a',marginLeft:'0.5em' ,'&:hover': { border: 'none', backgroundColor:'#80cbc4' } }} startIcon={<RotateLeftRoundedIcon sx={{ color: 'white' }} />}>reset filters</Button>
         </Box>
       </Box>
+      {filteredOrders.length === 0 && 
+        <Box sx={{height: '80vh', width: "100vw", alignItems: 'center' , display: 'flex', justifyContent: 'center' }}>
+        <CircularProgress size={'8rem'} />
+      </Box>
+      }
       <Orders filteredOrders={filteredOrders} handleChangeStatus={handleChangeStatusButton} />
     </Box>
   );
