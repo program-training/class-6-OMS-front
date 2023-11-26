@@ -22,7 +22,6 @@ import {
   filterOrdersByDate,
   filterOrdersByOrderType,
   filterOrdersByStatus,
-  initialSelctedOptions,
 } from "../../../utils/filtersFuncs";
 import { useNavigate } from "react-router";
 import TuneIcon from '@mui/icons-material/Tune';
