@@ -77,13 +77,13 @@ const SignUp = ({ open, handleClose }:SignUpProps) => {
             }
             setFormValid(null);
             setLoading(true)
-            const status = await registerUser({
+            const response = await registerUser({
               userName: userNameInput,
               email: emailInput,
               password: passwordInput,
               isAdmin: true
             });
-            if (status === 200) {
+            if (response?.status === 200) {
                 setLoading(false)
                 setSuccess("user added successfully");
                 const id = setTimeout(async () => {
@@ -91,13 +91,13 @@ const SignUp = ({ open, handleClose }:SignUpProps) => {
                 }, 1500);
                 setTimeoutId(id)
               }
-            else if (status === 401 || status === 400){
-                Navigate('/orders/login')
-                alert('you are not log-in please re log-in')
+            else if (response?.status === 401){
+                Navigate('/orders/login/?notLoginPopup=true')
+                localStorage.removeItem('access_token')
             }  
             else {
               setLoading(false)
-              setFormValid("oops... something get wrong try again");
+              setFormValid(response?.data || "oops... something get wrong try again");
             }
           };
     

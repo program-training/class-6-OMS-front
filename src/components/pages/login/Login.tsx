@@ -75,12 +75,12 @@ const Login = () => {
     }
     setFormValid(null);
     setLoading(true)
-    const token = await loginUser({
+    const resFromLogin = await loginUser({
       email: emailInput,
       password: passwordInput,
     });
-    if (token) {
-      localStorage.setItem("access_token", token);
+    if (typeof resFromLogin === 'string') {
+      localStorage.setItem("access_token", resFromLogin);
       setLoading(false)
       setSuccess("you are connected");
       const id = setTimeout(async () => {
@@ -90,7 +90,7 @@ const Login = () => {
     }
     else {
       setLoading(false)
-      setFormValid("oops something get wrong try again");
+      setFormValid(resFromLogin?.data || 'oops something get wrong try again');
     }
   };
   useEffect(() => {
