@@ -286,7 +286,7 @@ export default function Table() {
       </Box>
       <Box sx={{ width: '100vw', height: '3em', display: 'flex', alignItems: 'center', marginTop: '2em' }}>
         <TableHeader />
-        <Box sx={{ display: 'flex', width: '40em' }}>
+        <Box sx={{ display: 'flex',  width: '40em' , ml: '2.8em'}}>
           <Button onClick={handleOpen} sx={{ color: 'white', border: 'none', width: '9em',backgroundColor:'#26a69a', '&:hover': { border: 'none', backgroundColor:'#80cbc4' } }} startIcon={<TuneIcon />}>Filters</Button>
           <Button variant="outlined" onClick={handleReset} sx={{ color: 'white', border: 'none',backgroundColor:'#26a69a',marginLeft:'0.5em' ,'&:hover': { border: 'none', backgroundColor:'#80cbc4' } }} startIcon={<RotateLeftRoundedIcon sx={{ color: 'white' }} />}>reset filters</Button>
         </Box>
