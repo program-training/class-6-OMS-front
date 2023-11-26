@@ -6,7 +6,6 @@ import {
     DialogActions,
     DialogContent,
     DialogTitle,
-    FormControlLabel,
     TextField,
     InputAdornment,
     FormControl,
@@ -16,7 +15,6 @@ import {
     Input,
     Alert,
     Stack,
-    Checkbox,
     createTheme,
     ThemeProvider
 } from "@mui/material";
@@ -25,21 +23,17 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import registerValidation from "../../../utils/registerValidation";
 import { registerUser } from "../../../services/usersServices";
-
 interface SignUpProps {
     open: boolean; // Define the type of the open prop
     //isAuthenticated: boolean
     handleClose: () => void; // Define the type of the handleClose prop
 }
-
 const theme = createTheme({
     typography: {
         fontFamily: 'Barlow, sans-serif'
     }
 });
-
 const SignUp = ({ open, handleClose }:SignUpProps) => {
-
         const Navigate = useNavigate()
         // useEffect(() => {
         //     if (!isAuthenticated) {
@@ -47,23 +41,16 @@ const SignUp = ({ open, handleClose }:SignUpProps) => {
         //     }
         // }, [])
         const [showPassword, setShowPassword] = React.useState(false);
-
         //Inputs
         const [userNameInput, setUserNameInput] = useState<string>("");
         const [emailInput, setEmailInput] = useState<string>("");
         const [passwordInput, setPasswordInput] = useState<string>("");
         const [confirmPassInput, setConfirmPassInput] = useState<string>("");
-
         // Overall Form Validity
         const [formValid, setFormValid] = useState<null | string>();
         const [success, setSuccess] = useState<null | string>();
         const [loading, setLoading] = useState<boolean>(false);
         const [timeoutId, setTimeoutId] = useState<number | null>(null);
-
-
-
-
-
         // Handles Display and Hide Password
         const handleClickShowPassword = () => setShowPassword((show) => !show);
         const handleMouseDownPassword = (
@@ -71,7 +58,6 @@ const SignUp = ({ open, handleClose }:SignUpProps) => {
         ) => {
             event.preventDefault();
         };
-
         //handle Submission
         const handleSubmit = async () => {
             setSuccess(null);
@@ -125,12 +111,9 @@ const SignUp = ({ open, handleClose }:SignUpProps) => {
         
         
         return (
-
             <ThemeProvider theme={theme}>
-
                 <Dialog open={open} onClose={handleClose} fullWidth>
                     <DialogTitle> Add admin <IconButton onClick={handleClose} style={{ float: 'right' }}  > <CloseIcon /> </IconButton>
-
                     </DialogTitle>
                     <DialogContent>
                         <Stack spacing={2} margin={2}>
@@ -218,7 +201,6 @@ const SignUp = ({ open, handleClose }:SignUpProps) => {
             )}
           
                             </FormControl>
-                            <FormControlLabel control={<Checkbox/>} label=' I agree to terms & conditions' />
                             <Button 
                             sx={{ bgcolor: 'teal', color: 'white', fontFamily: 'Barlow' ,'&:hover':{
                                 backgroundColor: '#80cbc4'
@@ -233,10 +215,6 @@ const SignUp = ({ open, handleClose }:SignUpProps) => {
                     </DialogActions>
                 </Dialog>
             </ThemeProvider>
-
-
         )
     }
-
-
 export default SignUp

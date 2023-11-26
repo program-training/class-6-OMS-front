@@ -17,7 +17,8 @@ const SuperHeader = () => {
   return (
     <div>
       <Header openSignUp={openPopUp} />
-      <SignUp  open={openSignUp} handleClose={closePopUp} />
+      <SignUp
+        open={openSignUp} handleClose={closePopUp} />
     </div>
   );
 };
