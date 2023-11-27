@@ -26,7 +26,7 @@ function Orders({ filteredOrders, handleChangeStatus }: oProps) {
                             {/* Table row and Accordion */}
                             <Box sx={{ display: 'flex', width: '71vw', justifyContent: 'space-around', alignItems: 'center' }}>
                                 <Typography sx={{ width: '20%', flexShrink: 0, textAlign: 'center', fontSize: '1.2rem' }}>{order._id}</Typography>
-                                <Typography sx={{ width: '12%', flexShrink: 0, textAlign: 'center', fontSize: '1.2rem' }}>{order.price}</Typography>
+                                <Typography sx={{ width: '12%', flexShrink: 0, textAlign: 'center', fontSize: '1.2rem' }}>{order.price} $</Typography>
                                 <Typography sx={{ width: '12%', flexShrink: 0, textAlign: 'center', fontSize: '1.2rem' }}>{new Date(order.orderTime).toLocaleDateString('en-GB')}</Typography>
                                 <Typography sx={{ width: '12%', flexShrink: 0, textAlign: 'center', fontSize: '1.2rem' }}>{order.shippingDetails.orderType}</Typography>
                                 <Typography sx={{ width: '12%', flexShrink: 0, textAlign: 'center', fontSize: '1.2rem' , padding: "0.1rem", background: `${order.status === 'accepted' ? '#46f31a': order.status === 'processing' ? '#fcb45c' : order.status === 'sent' ? '#e1f132' : '#ff4639' }`, borderRadius: '1rem' }}>{order.status}</Typography>
