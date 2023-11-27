@@ -49,6 +49,17 @@ const style = {
 function valuetext(value: number) {
   return `${value}$`;
 }
+const marks = [
+  {
+    value: 1,
+    label: '1 $',
+  },
+  {
+    value: 2000,
+    label: '2000 $',
+  },
+  
+];
 
 export default function Table() {
   const Navigate = useNavigate()
@@ -210,7 +221,9 @@ export default function Table() {
                     valueLabelDisplay="auto"
                     getAriaValueText={valuetext}
                     max={2000}
+                    min={1}
                     step={10}
+                    marks={marks}
                   />
                 </Box>
               </Box>
@@ -278,7 +291,7 @@ export default function Table() {
                 </Stack>
               </Box>
               <Box sx={{ marginTop: '3em' }}>
-                <Button startIcon={<DoneIcon />} sx={{ color: 'black', width: '9em', backgroundColor: '#009688', '&:hover': { backgroundColor: '#80cbc4' } }} onClick={handleClose}>Done</Button>
+                <Button startIcon={<DoneIcon />} sx={{ color: 'black', width: '9em', backgroundColor: '#009688', '&:hover': { backgroundColor: '#80cbc4' } }} onClick={handleClose}>See results</Button>
               </Box>
             </Box>
 
