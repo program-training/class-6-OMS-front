@@ -72,7 +72,7 @@ const SignUp = ({ open, handleClose }:SignUpProps) => {
               return;
             }
             if (passwordInput !== confirmPassInput){
-              setFormValid("password is not match. Please Re-Enter");
+              setFormValid("password does not match. Please Re-Enter");
               return;
             }
             setFormValid(null);
