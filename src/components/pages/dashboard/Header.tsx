@@ -17,7 +17,7 @@ const Header: React.FC<HeaderProps> = ({ openSignUp }) => {
 
 
     return (
-        <AppBar sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', pl: '1em', pr: '2.5em', alignItems: 'center', width: '100vw', height: '10vh', top: '0', backgroundColor: '#4db6ac', position: 'relative' }}>
+        <AppBar sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', pl: '1em', pr: '2.5em', alignItems: 'center', width: '100vw', height: '10vh', top: '0', backgroundColor: '#4db6ac', position: 'fixed' }}>
             <Box>
                 <style>
                     @import url('https://fonts.googleapis.com/css2?family=Barlow:wght@500&display=swap');

@@ -188,7 +188,7 @@ export default function Table() {
 
 
   return (
-    <Box>
+    <Box sx={{marginTop:'7em'}}>
       <Box>
         <Modal
           open={open}
