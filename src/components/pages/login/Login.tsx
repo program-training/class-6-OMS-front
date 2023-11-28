@@ -26,6 +26,7 @@ import LoginIcon from "@mui/icons-material/Login";
 import { loginUser } from "../../../services/usersServices";
 import loginValidation from "../../../utils/loginValidation";
 import { useLocation, useNavigate } from "react-router-dom";
+import JoinRequest from "./JoinRequest";
 
 const theme = createTheme({
   typography: {
@@ -52,7 +53,10 @@ const Login = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [timeoutId, setTimeoutId] = useState<number | null>(null);
 
-
+  const [openJoinRequest, setOpenJoinRequest] = useState(false);
+  const closeSendPopUp = () => {
+    setOpenJoinRequest(false);
+  };
 
   // Handles Display and Hide Password
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -122,7 +126,6 @@ const Login = () => {
         >
           <Typography variant="h1" fontFamily={'Barlow'} color={teal[50]}> Welcome to OMS master </Typography>
           <Typography variant="h4" fontFamily={'Barlow'} color={teal[50]}> Your premier OMS solution   </Typography>
-
           <Grid item width='28%' pt={'2.5em'}>
             <Box boxShadow={3} p={4} borderRadius={1} bgcolor={teal[50]} >
               <Grid item p={3} >
@@ -183,7 +186,7 @@ const Login = () => {
                 >
                   LOGIN
                 </Button>
-
+                
                 {formValid && (
                   <Stack sx={{ width: "100%", paddingTop: "10px" }} spacing={2}>
                     <Alert severity="error">{formValid}</Alert>
@@ -203,6 +206,14 @@ const Login = () => {
               </Stack>
             </Box>
           </Grid>
+          <Box sx={{position:"relative", right: '42em', bottom:'1.5em'}}>
+            <Typography sx={{paddingLeft: '0.5em', color:'white'}}>
+            Don't have an account?</Typography>
+            <Button variant="contained" onClick={() => {setOpenJoinRequest(true)}} sx={{bgcolor: '#04ffea', color: 'black', fontFamily: 'Barlow', '&:hover': {
+              backgroundColor: '#80cbc4'
+            }}}>send joining request</Button>
+            <JoinRequest open={openJoinRequest} handleClose={closeSendPopUp}/>
+         </Box>
         </Grid>
       </Box>
     </ThemeProvider>

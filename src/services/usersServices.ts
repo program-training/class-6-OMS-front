@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
-import UserInterface from "../interfaces/userInterface";
+import UserInterface, { requsetToJoinInterface } from "../interfaces/userInterface";
 const HOST = import.meta.env.VITE_SERVER_HOST || "http://localhost:8181";
 export const BASE_URL = `${HOST}/api`;
 
@@ -16,11 +16,10 @@ export const handleUnAxiosError = (
       console.log("Unauthorized: Please login or provide valid credentials.");
       return axiosError.response;
     } else {
-      // Handle other Axios errors
       console.error("Axios error:", axiosError.message);
+      return axiosError.response;
     }
   } else {
-    // Handle other non-Axios errors
     console.error("Error:", error);
   }
 };
@@ -50,6 +49,18 @@ export async function registerUser(
       },
     };
     const response = await axios.post(`${BASE_URL}/register`, user, config);
+    return response;
+  } catch (error) {
+    const response = handleUnAxiosError(error) as AxiosResponse;
+    return response;
+  }
+}
+
+export async function joinRequest(
+  user: requsetToJoinInterface
+): Promise<AxiosResponse> {
+  try {
+    const response = await axios.post(`${BASE_URL}/sendEmailToJoin`, user);
     return response;
   } catch (error) {
     const response = handleUnAxiosError(error) as AxiosResponse;
