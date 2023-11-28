@@ -10,7 +10,7 @@ import {
   Modal,
   CircularProgress,
 } from "@mui/material";
-import Orders from "./Orders";
+import Order from "./Order";
 import TableHeader from "./TableHeader";
 import { ChangeEvent, useEffect, useState } from "react";
 import { fetchOrders, putOrder } from "../../../services/ordersService";
@@ -39,7 +39,6 @@ const style = {
   height: 500,
   bgcolor: '#e0f2f1',
   border: '2px solid #000',
-  boxShadow: 24,
   pt: 2,
   px: 4,
   pb: 3,
@@ -310,7 +309,11 @@ export default function Table() {
         <CircularProgress size={'8rem'} />
       </Box>
       }
-      <Orders filteredOrders={filteredOrders} handleChangeStatus={handleChangeStatusButton} />
+       <Box sx={{ width: '100vw', minHeight: '50vh', display: 'flex', justifyItems: 'center', flexDirection: 'column' }}>
+       {filteredOrders.map((order) => <Order order={order} handleChangeStatus={handleChangeStatusButton}/>)}
+
+       </Box>
+      
     </Box>
   );
 }
