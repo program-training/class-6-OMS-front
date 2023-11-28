@@ -5,6 +5,11 @@ interface UserInterface {
     password: string;
     isAdmin: boolean
   }
-  
-  export default UserInterface;
+
+export interface requsetToJoinInterface {
+  name: string;
+  email: string;
+}
+
+export default UserInterface;
   
