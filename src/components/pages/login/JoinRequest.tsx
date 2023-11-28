@@ -22,12 +22,17 @@ interface JoinRequestProps {
 const JoinRequest = ({ open, handleClose }: JoinRequestProps) => {
   const [userNameInput, setUserNameInput] = useState<string>("");
   const [emailInput, setEmailInput] = useState<string>("");
-
   const [formValid, setFormValid] = useState<null | string>();
   const [success, setSuccess] = useState<null | string>();
   const [loading, setLoading] = useState<boolean>(false);
   const [timeoutId, setTimeoutId] = useState<number | null>(null);
-  
+  useEffect(() => {
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
+  }, [timeoutId]);
   
   const handleSubmit = async () => {
     setSuccess(null);
@@ -49,14 +54,6 @@ const JoinRequest = ({ open, handleClose }: JoinRequestProps) => {
       setFormValid("oops... something get wrong try again");
     }
   };
-
-  useEffect(() => {
-    return () => {
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-      }
-    };
-  }, [timeoutId]);
 
   return (
     <Dialog open={open} onClose={handleClose} fullWidth>

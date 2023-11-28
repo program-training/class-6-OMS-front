@@ -25,7 +25,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import LoginIcon from "@mui/icons-material/Login";
 import { loginUser } from "../../../services/usersServices";
 import loginValidation from "../../../utils/loginValidation";
-import { useLocation, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import JoinRequest from "./JoinRequest";
 
 const theme = createTheme({
@@ -36,29 +36,18 @@ const theme = createTheme({
 
 const Login = () => {
   const Navigate = useNavigate()
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-
-  const popUpNotLogin = queryParams.get('notLoginPopup');
-  console.log(popUpNotLogin);
   const [showPassword, setShowPassword] = React.useState(false);
-
-  //Inputs
   const [emailInput, setEmailInput] = useState<string>("");
   const [passwordInput, setPasswordInput] = useState<string>("");
-
-  // Overall Form Validity
   const [formValid, setFormValid] = useState<null | string>();
   const [success, setSuccess] = useState<null | string>();
   const [loading, setLoading] = useState<boolean>(false);
   const [timeoutId, setTimeoutId] = useState<number | null>(null);
-
   const [openJoinRequest, setOpenJoinRequest] = useState(false);
   const closeSendPopUp = () => {
     setOpenJoinRequest(false);
   };
 
-  // Handles Display and Hide Password
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -66,7 +55,6 @@ const Login = () => {
     event.preventDefault();
   };
 
-  //handle Submission
   const handleSubmit = async () => {
     setSuccess(null);
     const { error } = loginValidation({
@@ -129,7 +117,6 @@ const Login = () => {
           <Grid item width='28%' pt={'2.5em'}>
             <Box boxShadow={3} p={4} borderRadius={1} bgcolor={teal[50]} >
               <Grid item p={3} >
-
                 <Typography variant="h3" fontFamily={'Barlow'} color={teal[800]}>
                   Admin Login</Typography>
               </Grid>
