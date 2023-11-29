@@ -10,10 +10,10 @@ export const MainRoute = () => {
   const  isAuthenticated  = useAuth();
   useEffect(() => {
     if (!isAuthenticated) {
-      navigate("/orders/login");
+      navigate("/oms/orders/login");
     }
     else{
-      navigate("/orders/dashboard");
+      navigate("/oms/orders/dashboard");
     }
   },[])
   return (

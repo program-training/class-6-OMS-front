@@ -10,7 +10,7 @@ const DashBoard = () => {
   const navigate = useNavigate();
   useEffect(() => {
   if (!isAuthenticated) {
-    navigate("/orders/login");
+    navigate("/oms/orders/login");
   }
   },[])
   

@@ -11,7 +11,7 @@ const Header: React.FC<HeaderProps> = ({ openSignUp }) => {
     const Navigate = useNavigate()
     const handleLogOut = () => {
         localStorage.removeItem('access_token');
-        Navigate('/orders/login')
+        Navigate('/oms/orders/login')
     }
 
 

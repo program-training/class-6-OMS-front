@@ -71,7 +71,7 @@ const Login = () => {
       setLoading(false)
       setSuccess("you are connected");
       const id = setTimeout(async () => {
-        Navigate('/orders/dashboard')
+        Navigate('/oms/orders/dashboard')
       }, 1500);
       setTimeoutId(Number(id))
     }
