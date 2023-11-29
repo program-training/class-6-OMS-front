@@ -23,15 +23,13 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import registerValidation from "../../../utils/registerValidation";
 import { registerUser } from "../../../services/usersServices";
-interface SignUpProps {
-  open: boolean;
-  handleClose: () => void;
-}
+import { typographyStyle } from "../../../style";
+import { SignUpProps } from "../../../interfaces/propsInterfaces";
+
 const theme = createTheme({
-  typography: {
-    fontFamily: "Barlow, sans-serif",
-  },
+  typography: typographyStyle
 });
+
 const SignUp = ({ open, handleClose }: SignUpProps) => {
   const Navigate = useNavigate();
   const [showPassword, setShowPassword] = React.useState(false);

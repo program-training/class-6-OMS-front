@@ -23,3 +23,13 @@ export interface orderProps {
       _status: options["status"]
     ) => (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => Promise<void>;
   }
+
+export interface JoinRequestProps {
+  open: boolean;
+  handleClose: () => void;
+}
+
+export interface SignUpProps {
+    open: boolean;
+    handleClose: () => void;
+}
