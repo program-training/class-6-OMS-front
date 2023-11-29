@@ -1,26 +1,12 @@
+import { tOrderTypes, tSelectedOptions, tStatuses } from "../interfaces/interfacesForUtils";
 import { OrderInterface } from "../interfaces/ordersInterface";
-export interface options {
-    orderType: "express" | "regular" | "pickup";
-    status: "processing" | "sent" | "accepted" | "cancelled";
-    price: { minPrice: number; maxPrice: number };
-    orderTime: string;
-    userId: string;
-  }
-export  type tStatuses = options["status"][];
-export  type tOrderTypes = options["orderType"][];
-export  interface tSelectedOptions {
-    orderType: tOrderTypes;
-    status: tStatuses;
-    price: { minPrice: number; maxPrice: number };
-    orderTime: string;
-  }
-  
+
 export const initialSelectedOptions: tSelectedOptions = {
-    orderType: ["express", "regular", "pickup"],
-    status: ["processing", "sent", "accepted", "cancelled"],
-    price: { minPrice: 0, maxPrice: 2000 },
-    orderTime: '0000-00-00',
-  };
+  orderType: ["express", "regular", "pickup"],
+  status: ["processing", "sent", "accepted", "cancelled"],
+  price: { minPrice: 0, maxPrice: 2000 },
+  orderTime: '0000-00-00',
+};
   
 export const filterOrdersByDate = (
     orders: OrderInterface[],

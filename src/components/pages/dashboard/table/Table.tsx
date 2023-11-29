@@ -16,9 +16,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { fetchOrders, putOrder } from "../../../../services/ordersService";
 import { OrderInterface } from "../../../../interfaces/ordersInterface";
 import {
-  options,
   initialSelectedOptions,
-  tSelectedOptions,
   filterOrdersByPriceRange,
   filterOrdersByDate,
   filterOrdersByOrderType,
@@ -29,6 +27,7 @@ import TuneIcon from "@mui/icons-material/Tune";
 import DoneIcon from "@mui/icons-material/Done";
 import RotateLeftRoundedIcon from "@mui/icons-material/RotateLeftRounded";
 import { filterModalStyle } from "./style";
+import { options, tSelectedOptions } from "../../../../interfaces/interfacesForUtils";
 
 
 

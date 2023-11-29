@@ -1,4 +1,5 @@
-import { options } from "../utils/filtersFuncs";
+
+import { options } from "./interfacesForUtils";
 import { OrderInterface } from "./ordersInterface";
 
 export interface pApproveCancel {
