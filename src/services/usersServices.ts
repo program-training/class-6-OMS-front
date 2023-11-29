@@ -5,7 +5,7 @@ export const BASE_URL = `${HOST}/api`;
 
 export const handleUnAxiosError = (
   error: AxiosError | unknown
-): void | 401 | AxiosResponse => {
+): void | AxiosResponse => {
   if (axios.isAxiosError(error)) {
     const axiosError = error as AxiosError;
     if (axiosError.response?.status === 401) {
@@ -16,7 +16,7 @@ export const handleUnAxiosError = (
       console.log("Unauthorized: Please login or provide valid credentials.");
       return axiosError.response;
     } else {
-      console.error("Axios error:", axiosError.message);
+      console.error("Axios error:", axiosError);
       return axiosError.response;
     }
   } else {
@@ -29,7 +29,6 @@ export async function loginUser(
   try {
     const response = await axios.post(`${BASE_URL}/auth/login`, user);
     if (response.status === 200 && response.data) {
-      console.log(response.data);
       return response.data.access_token;
     } else {
       throw new Error("login failed token was not provided");

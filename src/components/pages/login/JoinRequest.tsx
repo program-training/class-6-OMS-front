@@ -14,10 +14,8 @@ import {
 import CloseIcon from "@mui/icons-material/Close";
 
 import { joinRequest } from "../../../services/usersServices";
-interface JoinRequestProps {
-  open: boolean;
-  handleClose: () => void;
-}
+import { JoinRequestProps } from "../../../interfaces/propsInterfaces";
+
 
 const JoinRequest = ({ open, handleClose }: JoinRequestProps) => {
   const [userNameInput, setUserNameInput] = useState<string>("");

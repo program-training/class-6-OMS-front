@@ -16,10 +16,6 @@ import {
   ThemeProvider
 } from "@mui/material";
 import { teal } from '@mui/material/colors';
-
-// import CloseIcon from "@mui/icons-material/Close";
-
-// Material UI Icon Imports
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import LoginIcon from "@mui/icons-material/Login";
@@ -27,11 +23,10 @@ import { loginUser } from "../../../services/usersServices";
 import loginValidation from "../../../utils/loginValidation";
 import {  useNavigate } from "react-router-dom";
 import JoinRequest from "./JoinRequest";
+import { typographyStyle } from "../../../style";
 
 const theme = createTheme({
-  typography: {
-    fontFamily: 'Barlow, sans-serif'
-  }
+  typography: typographyStyle
 });
 
 const Login = () => {
@@ -110,17 +105,17 @@ const Login = () => {
           direction="column"
           justifyContent="center"
           alignItems="center"
-          style={{ minHeight: "100vh", width: '100vw' }}
+          style={{ maxHeight: "100vh", width: '100vw' }}
         >
           <Typography variant="h1" fontFamily={'Barlow'} color={teal[50]}> Welcome to OMS master </Typography>
           <Typography variant="h4" fontFamily={'Barlow'} color={teal[50]}> Your premier OMS solution   </Typography>
-          <Grid item width='28%' pt={'2.5em'}>
+          <Grid item width='28%' pt={'2.5em'} maxHeight={'50vh'}>
             <Box boxShadow={3} p={4} borderRadius={1} bgcolor={teal[50]} >
               <Grid item p={3} >
                 <Typography variant="h3" fontFamily={'Barlow'} color={teal[800]}>
                   Admin Login</Typography>
               </Grid>
-              <Stack spacing={6} margin={4} >
+              <Stack spacing={4} margin={4} >
                 <TextField
                   label="Email Address"
                   fullWidth
@@ -175,25 +170,25 @@ const Login = () => {
                 </Button>
                 
                 {formValid && (
-                  <Stack sx={{ width: "100%", paddingTop: "10px" }} spacing={2}>
+                  <Stack sx={{ width: "100%" }} spacing={2}>
                     <Alert severity="error">{formValid}</Alert>
                   </Stack>
                 )}
                 {loading && (
-                  <Stack sx={{ width: "100%", paddingTop: "10px", alignItems: 'center' }} spacing={2}>
+                  <Stack sx={{ width: "100%", alignItems: 'center' }} spacing={2}>
                     <CircularProgress />
                   </Stack>
                 )}
 
                 {success && (
-                  <Stack sx={{ width: "100%", paddingTop: "10px" }} spacing={2}>
+                  <Stack sx={{ width: "100%" }} spacing={2}>
                     <Alert severity="success">{success}</Alert>
                   </Stack>
                 )}
               </Stack>
             </Box>
           </Grid>
-          <Box sx={{position:"relative", right: '42em', bottom:'1.5em'}}>
+          <Box sx={{position:"absolute", left: '1em', bottom:'1em'}}>
             <Typography sx={{paddingLeft: '0.5em', color:'white'}}>
             Don't have an account?</Typography>
             <Button variant="contained" onClick={() => {setOpenJoinRequest(true)}} sx={{bgcolor: '#04ffea', color: 'black', fontFamily: 'Barlow', '&:hover': {

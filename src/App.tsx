@@ -1,10 +1,9 @@
 import MyRouter from "./components/myrouter/MyRouter"
 import { createTheme, ThemeProvider } from "@mui/material"
+import { typographyStyle } from "./style"
 
 const theme = createTheme({
-  typography: {
-    fontFamily: 'Barlow, sans-serif'
-  }
+  typography: typographyStyle
 })
 
 function App() {
