@@ -3,13 +3,17 @@ import SuperHeader from "../register/Modal";
 import Table from "./table/Table";
 import { useAuth } from "../../../utils/useAuth";
 import { useNavigate } from "react-router";
+import { useEffect } from "react";
 
 const DashBoard = () => {
   const isAuthenticated = useAuth();
   const navigate = useNavigate();
+  useEffect(() => {
   if (!isAuthenticated) {
     navigate("/orders/login");
   }
+  })
+  
 
   return (
     <Box
