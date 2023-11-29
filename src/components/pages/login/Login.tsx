@@ -73,7 +73,7 @@ const Login = () => {
       const id = setTimeout(async () => {
         Navigate('/orders/dashboard')
       }, 1500);
-      setTimeoutId(id)
+      setTimeoutId(Number(id))
     }
     else {
       setLoading(false)

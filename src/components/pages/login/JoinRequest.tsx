@@ -46,7 +46,7 @@ const JoinRequest = ({ open, handleClose }: JoinRequestProps) => {
       const id = setTimeout(async () => {
         handleClose();
       }, 3000);
-      setTimeoutId(id);
+      setTimeoutId(Number(id));
     } else {
       setLoading(false);
       setFormValid("oops... something get wrong try again");
