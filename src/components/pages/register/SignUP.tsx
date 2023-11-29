@@ -84,7 +84,7 @@ const SignUp = ({ open, handleClose }: SignUpProps) => {
       const id = setTimeout(async () => {
         handleClose();
       }, 1500);
-      setTimeoutId(id);
+      setTimeoutId(Number(id));
     } else if (response?.status === 401) {
       Navigate("/orders/login/?notLoginPopup=true");
       localStorage.removeItem("access_token");
