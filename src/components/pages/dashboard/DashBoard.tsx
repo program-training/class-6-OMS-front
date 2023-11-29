@@ -12,7 +12,7 @@ const DashBoard = () => {
   if (!isAuthenticated) {
     navigate("/orders/login");
   }
-  })
+  },[])
   
 
   return (
