@@ -7,10 +7,10 @@ function MyRouter(): JSX.Element {
   return (
     <Router>
       <Routes>
-          <Route path="/orders/login" element={<Login/>} />
-          <Route path="*" element={<PageNotFound />} />
-          <Route path="/" element={<DashBoard/>}></Route>
-          <Route path="/orders/dashboard" element={<DashBoard/>} />  
+          <Route path="/oms/orders/login" element={<Login/>} />
+          <Route path="/oms/*" element={<PageNotFound />} />
+          <Route path="/oms/" element={<DashBoard/>}></Route>
+          <Route path="/oms/orders/dashboard" element={<DashBoard/>} />  
       </Routes>
     </Router>
   );

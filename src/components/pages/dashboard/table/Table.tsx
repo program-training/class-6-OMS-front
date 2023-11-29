@@ -74,7 +74,7 @@ export default function Table() {
     if (temp) {
       setOrders(temp);
     } else {
-      Navigate("/orders/login?notLoginPopup=true");
+      Navigate("/oms/orders/login?notLoginPopup=true");
     }
   }
 
@@ -165,7 +165,7 @@ export default function Table() {
           setFilteredOrders(updatedOrders);
         }
       } else {
-        Navigate("/orders/login?notLoginPopup=true");
+        Navigate("/oms/orders/login?notLoginPopup=true");
       }
     };
   };

@@ -86,7 +86,7 @@ const SignUp = ({ open, handleClose }: SignUpProps) => {
       }, 1500);
       setTimeoutId(Number(id));
     } else if (response?.status === 401) {
-      Navigate("/orders/login/?notLoginPopup=true");
+      Navigate("/oms/orders/login/?notLoginPopup=true");
       localStorage.removeItem("access_token");
     } else {
       setLoading(false);
