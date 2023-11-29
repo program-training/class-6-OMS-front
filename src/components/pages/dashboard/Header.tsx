@@ -2,11 +2,10 @@ import { ExitToApp, PersonAdd } from "@mui/icons-material"
 import { AppBar, Box, Button, Typography } from "@mui/material"
 import '../../../index.css'
 import { useNavigate } from "react-router";
+import { HeaderProps } from "../../../interfaces/propsInterfaces";
 
 
-interface HeaderProps {
-    openSignUp: () => void;
-}
+
 
 const Header: React.FC<HeaderProps> = ({ openSignUp }) => {
     const Navigate = useNavigate()

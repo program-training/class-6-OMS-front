@@ -1,17 +1,8 @@
 import { ChangeCircle, Clear, ExpandMore } from '@mui/icons-material'
 import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Typography } from '@mui/material'
-import { OrderInterface } from '../../../interfaces/ordersInterface';
-import { options } from '../../../utils/filtersFuncs';
 import { useState } from 'react';
-import ApproveCancel from './ApproveCancel';
-
-
-
-
-interface orderProps {
-    order: OrderInterface;
-    handleChangeStatus: (order: OrderInterface, _status: options["status"]) => (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => Promise<void>
-}
+import ApproveCancel from './approveCancel/ApproveCancel';
+import { orderProps } from '../../../interfaces/propsInterfaces';
 
 
 
