@@ -110,7 +110,7 @@ const Login = () => {
           <Typography variant="h1" fontFamily={'Barlow'} color={teal[50]}> Welcome to OMS master </Typography>
           <Typography variant="h4" fontFamily={'Barlow'} color={teal[50]}> Your premier OMS solution   </Typography>
           <Grid item width='28%' pt={'2.5em'} maxHeight={'50vh'}>
-            <Box boxShadow={3} p={4} borderRadius={1} bgcolor={teal[50]} >
+            <Box boxShadow={3} p={3} borderRadius={1} bgcolor={teal[50]} >
               <Grid item p={3} >
                 <Typography variant="h3" fontFamily={'Barlow'} color={teal[800]}>
                   Admin Login</Typography>
