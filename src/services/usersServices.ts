@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import UserInterface, { requsetToJoinInterface } from "../interfaces/userInterface";
-const HOST = import.meta.env.VITE_SERVER_HOST || "http://localhost:8181";
+const HOST = import.meta.env.VITE_SERVER_HOST || "http://localhost:8181/oms";
 export const BASE_URL = `${HOST}/api`;
 
 export const handleUnAxiosError = (
