@@ -8,7 +8,7 @@ function MyRouter(): JSX.Element {
     <Router>
       <Routes>
           <Route path="/oms/orders/login" element={<Login/>} />
-          <Route path="/oms/*" element={<PageNotFound />} />
+          <Route path="/*" element={<PageNotFound />} />
           <Route path="/oms/" element={<DashBoard/>}></Route>
           <Route path="/oms/orders/dashboard" element={<DashBoard/>} />  
       </Routes>
