@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import UserInterface, { requsetToJoinInterface } from "../interfaces/userInterface";
-const HOST = import.meta.env.VITE_SERVER_HOST || "http://localhost:8181/oms";
-export const BASE_URL = `${HOST}/api`;
+const HOST = import.meta.env.VITE_SERVER_HOST || "http://localhost:8181";
+export const BASE_URL = `${HOST}`;
 
 export const handleUnAxiosError = (
   error: AxiosError | unknown
@@ -27,7 +27,7 @@ export async function loginUser(
   user: Partial<UserInterface>
 ): Promise<string | void | AxiosResponse> {
   try {
-    const response = await axios.post(`${BASE_URL}/auth/login`, user);
+    const response = await axios.post(`${BASE_URL}/users/auth/login`, user);
     if (response.status === 200 && response.data) {
       return response.data.access_token;
     } else {
@@ -47,7 +47,7 @@ export async function registerUser(
         access_token: localStorage.getItem("access_token") || "token not found",
       },
     };
-    const response = await axios.post(`${BASE_URL}/register`, user, config);
+    const response = await axios.post(`${BASE_URL}/users/register`, user, config);
     return response;
   } catch (error) {
     const response = handleUnAxiosError(error) as AxiosResponse;
@@ -59,7 +59,7 @@ export async function joinRequest(
   user: requsetToJoinInterface
 ): Promise<AxiosResponse> {
   try {
-    const response = await axios.post(`${BASE_URL}/sendEmailToJoin`, user);
+    const response = await axios.post(`${BASE_URL}/users/sendEmailToJoin`, user);
     return response;
   } catch (error) {
     const response = handleUnAxiosError(error) as AxiosResponse;
