@@ -8,7 +8,7 @@ import {
   Button,
   Stack,
   Modal,
-  CircularProgress,
+  Skeleton,
 } from "@mui/material";
 import Order from "../Order";
 import TableHeader from "../TableHeader";
@@ -371,18 +371,10 @@ export default function Table() {
           </Button>
         </Box>
       </Box>
-      {filteredOrders.length === 0 && (
-        <Box
-          sx={{
-            height: "80vh",
-            width: "100vw",
-            alignItems: "center",
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          <CircularProgress size={"8rem"} />
-        </Box>
+      {filteredOrders.length === 0 && ( 
+      <Stack spacing={1} sx={{display: 'flex', alignItems: 'center'}}>
+       {new Array(8).fill(1).map((a) => (<Skeleton key={a} variant="rounded" width={'95vw'} height={'5em'} />))};
+     </Stack>
       )}
       <Box
         sx={{
